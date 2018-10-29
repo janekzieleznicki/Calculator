@@ -1,9 +1,7 @@
 package learning.calc.calculator
 
-import org.testng.Assert.assertEquals
-import org.testng.annotations.DataProvider
-import org.testng.annotations.Test
-
+import org.junit.Assert
+import org.junit.Test
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -11,25 +9,38 @@ import org.testng.annotations.Test
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class CalcModelTest {
-    @DataProvider
     fun additionProvider(): Array<Array<Int>> {
         return arrayOf(
             arrayOf(1,2,3),
-            arrayOf(3,6,0),
+            arrayOf(3,6,9),
             arrayOf(Int.MAX_VALUE,1, Int.MIN_VALUE),
             arrayOf(Int.MIN_VALUE,-1, Int.MAX_VALUE)
+//            arrayOf(1,1,1)
         )
     }
 
-    @Test(dataProvider = "additionProvider")
-    fun addition_isCorrect (left: Int, right: Int, res: Int){
-        // arrange
-        val calc = CalcModel()
-        calc.left = left
-        calc.right = right
-        // act
-        var output = calc.add()
-        // assert
-        assertEquals(output, res)
+    @Test
+    fun addition_left_and_right_should_make_result (){
+        additionProvider().forEach {
+                action: Array<Int> ->
+            // arrange
+            val calc = CalcModel()
+            calc.left = action[0]
+            calc.right = action[1]
+            // act
+            val output = calc.add()
+            // assert
+            Assert.assertEquals(action[2], output)
+        }
     }
+//    @Test
+//    fun substraction (){
+//        // arrange
+//        val calc = CalcModel()
+//        calc.left = left; calc.right = right
+//        // act
+//        val output = calc.substract()
+//        // assert
+//       Assert.assertEquals(output, result)
+//    }
 }

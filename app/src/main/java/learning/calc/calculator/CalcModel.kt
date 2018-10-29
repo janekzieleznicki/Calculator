@@ -7,4 +7,8 @@ class CalcModel {
     fun add(): Int {
         return left+right
     }
+
+    fun substract(): Int {
+        return left-right
+    }
 }
